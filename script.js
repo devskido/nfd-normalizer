@@ -336,85 +336,6 @@ if (!String.prototype.normalize) {
     alert('Your browser does not support Unicode normalization. Please use a modern browser.');
 }
 
-// Bookmark functionality
-function initBookmarkButton() {
-    const bookmarkBtn = document.getElementById('bookmarkBtn');
-    if (bookmarkBtn) {
-        bookmarkBtn.addEventListener('click', showBookmarkGuide);
-    }
-}
-
-function showBookmarkGuide() {
-    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-    const shortcut = isMac ? 'Cmd+D' : 'Ctrl+D';
-    
-    // Browser-specific instructions
-    const instructions = detectBrowserAndGuide();
-    
-    // Create custom modal for better UX
-    const modal = document.createElement('div');
-    modal.className = 'bookmark-modal';
-    modal.innerHTML = `
-        <div class="bookmark-modal-content">
-            <h3>
-                <span class="ko">즐겨찾기에 추가하기</span>
-                <span class="en">Add to Bookmarks</span>
-            </h3>
-            <p class="bookmark-shortcut">
-                <span class="ko">단축키: <strong>${shortcut}</strong></span>
-                <span class="en">Shortcut: <strong>${shortcut}</strong></span>
-            </p>
-            <p class="browser-instructions">${instructions}</p>
-            <button class="btn btn-primary" onclick="this.closest('.bookmark-modal').remove()">
-                <span class="ko">확인</span>
-                <span class="en">OK</span>
-            </button>
-        </div>
-    `;
-    
-    document.body.appendChild(modal);
-    
-    // Remove modal when clicking outside
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.remove();
-        }
-    });
-}
-
-function detectBrowserAndGuide() {
-    const userAgent = navigator.userAgent;
-    let instructions = '';
-    
-    if (userAgent.indexOf('Chrome') > -1 && userAgent.indexOf('Edg') === -1) {
-        instructions = `
-            <span class="ko">Chrome: 주소창 오른쪽 ⭐ 아이콘을 클릭하세요</span>
-            <span class="en">Chrome: Click the ⭐ icon on the right side of the address bar</span>
-        `;
-    } else if (userAgent.indexOf('Firefox') > -1) {
-        instructions = `
-            <span class="ko">Firefox: Ctrl+Shift+D를 누르거나 주소창의 ⭐ 아이콘을 클릭하세요</span>
-            <span class="en">Firefox: Press Ctrl+Shift+D or click the ⭐ icon in the address bar</span>
-        `;
-    } else if (userAgent.indexOf('Safari') > -1) {
-        instructions = `
-            <span class="ko">Safari: 공유 버튼을 눌러 "북마크 추가"를 선택하세요</span>
-            <span class="en">Safari: Click the Share button and select "Add Bookmark"</span>
-        `;
-    } else if (userAgent.indexOf('Edg') > -1) {
-        instructions = `
-            <span class="ko">Edge: 주소창 오른쪽 ⭐ 아이콘을 클릭하세요</span>
-            <span class="en">Edge: Click the ⭐ icon on the right side of the address bar</span>
-        `;
-    } else {
-        instructions = `
-            <span class="ko">주소창 근처의 즐겨찾기 아이콘을 찾아 클릭하세요</span>
-            <span class="en">Look for the bookmark icon near the address bar and click it</span>
-        `;
-    }
-    
-    return instructions;
-}
 
 // PWA Install functionality
 let deferredPrompt;
@@ -475,7 +396,3 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// Initialize bookmark button when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initBookmarkButton();
-});
