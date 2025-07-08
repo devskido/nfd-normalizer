@@ -1,7 +1,7 @@
 {
-  "name": "korean-file-name-normalizer",
+  "name": "nfd-normalizer",
   "version": "1.0.0",
-  "description": "A web-based tool that converts Korean file names from NFD to NFC encoding",
+  "description": "A web-based tool that converts file names from NFD to NFC encoding",
   "main": "index.html",
   "scripts": {
     "dev": "python -m http.server 8000",
@@ -9,7 +9,6 @@
     "deploy": "vercel --prod"
   },
   "keywords": [
-    "korean",
     "nfd",
     "nfc",
     "unicode",
@@ -20,6 +19,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/devskido/korean-normalizer.git"
+    "url": "https://github.com/devskido/nfd-normalizer.git"
   }
 }
